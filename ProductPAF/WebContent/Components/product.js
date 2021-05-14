@@ -131,3 +131,38 @@ function onProductDeleteComplete(response, status)
 		$("#alertError").show();  
 	}
 }
+
+// CLIENT-MODEL========================================================================= 
+function validateProductForm() 
+{  
+	// proCode  
+	if ($("#proCode").val().trim() == "")  
+	{   
+		return "Insert Pcode.";  
+	} 
+
+	// DESCRIPTION------------------------  
+	if ($("#desc").val().trim() == "")  
+	{   
+		return "Insert desc.";  
+	}
+	// qty------------------------  
+	if ($("#qty").val().trim() == "")  
+	{   
+		return "Insert qty.";  
+	}  
+		
+	//price-------------------------------
+	 var tmpAmount = $("#price").val().trim();
+	if (!$.isNumeric(tmpAmount)) 
+	 {
+	 return "Insert price.";
+	 }
+// category------------------------  
+	if ($("#category").val().trim() == "")  
+	{   
+		return "Insert category.";  
+	}
+
+	return true; 
+}
