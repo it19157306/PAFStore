@@ -164,3 +164,43 @@ public class product {
 	 
 	  return output;  
 	} 
+	
+	public String deleteProduct(String pro_ID)   
+	{   
+		String output = ""; 
+	 
+		try   
+		{    
+			Connection con = connect(); 
+	 
+			if (con == null)    
+			{
+				return "Error while connecting to the database for deleting."; 
+				
+			} 
+	 
+			// create a prepared statement    
+			String query = "delete from product where pro_ID=?"; 
+	 
+			PreparedStatement preparedStmt = con.prepareStatement(query); 
+	 
+			// binding values    
+			preparedStmt.setInt(1, Integer.parseInt(pro_ID)); 
+	 
+			// execute the statement    
+			preparedStmt.execute();    
+			con.close(); 
+	 
+			String newProduct = readProduct();    
+			output = "{\"status\":\"success\", \"data\": \"" +  newProduct + "\"}";    
+		}   
+		catch (Exception e)   
+		{    
+			output = "Error while deleting the payment.";    
+			System.err.println(e.getMessage());   
+		} 
+	 
+		return output;  
+	}
+	
+}
