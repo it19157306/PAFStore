@@ -83,3 +83,19 @@ $(document).on("click", ".btnUpdate", function(event)
 	$("#price").val($(this).closest("tr").find('td:eq(3)').text());  
 	$("#category").val($(this).closest("tr").find('td:eq(4)').text());     
 }); 
+
+//REMOVE===========================================
+$(document).on("click", ".btnRemove", function(event) 
+{  
+	$.ajax(  
+	{   
+		url : "ProductAPI",   
+		type : "DELETE",   
+		data : "pro_ID=" + $(this).data("productid"),   
+		dataType : "text",   
+		complete : function(response, status)   
+		{    
+			onProductDeleteComplete(response.responseText, status);   
+		}  
+	}); 
+}); 
