@@ -38,3 +38,20 @@ public class ProductAPI extends HttpServlet {
 	}
 
 	/**
+	
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String output = productObj.insertProduct(request.getParameter("proCode"),      
+				request.getParameter("desc"),
+				request.getParameter("qty"),
+				request.getParameter("price"), 
+				request.getParameter("category")); 
+	 
+				response.getWriter().write(output);
+	}
+
+	/**
+	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
+	 */
