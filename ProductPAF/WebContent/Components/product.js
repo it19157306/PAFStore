@@ -72,3 +72,14 @@ function onProductSaveComplete(response, status)
 	$("#hidProductIDSave").val("");  
 	$("#formProduct")[0].reset(); 
 } 
+
+// UPDATE========================================== 
+$(document).on("click", ".btnUpdate", function(event) 
+{     
+	$("#hidProductIDSave").val($(this).closest("tr").find('#hidProductIDUpdate').val());     
+	$("#proCode").val($(this).closest("tr").find('td:eq(0)').text());     
+	$("#desc").val($(this).closest("tr").find('td:eq(1)').text());     
+	$("#qty").val($(this).closest("tr").find('td:eq(2)').text());
+	$("#price").val($(this).closest("tr").find('td:eq(3)').text());  
+	$("#category").val($(this).closest("tr").find('td:eq(4)').text());     
+}); 
