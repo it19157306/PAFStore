@@ -1,3 +1,4 @@
+
 package com;
 
 import java.sql.Connection;
@@ -21,7 +22,7 @@ public class product {
 		}
 		return con;
 	}
-	
+
 	public String insertProduct(String proCode, String desc, String qty, String price, String category)  
 	{   
 		String output = ""; 
@@ -63,6 +64,7 @@ public class product {
 		
 	  return output;  
 	} 
+	
 	
 	public String readProduct()  
 	{   
@@ -204,3 +206,4 @@ public class product {
 	}
 	
 }
+
