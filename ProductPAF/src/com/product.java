@@ -63,3 +63,63 @@ public class product {
 		
 	  return output;  
 	} 
+	
+	public String readProduct()  
+	{   
+		String output = ""; 
+	
+		try   
+		{    
+			Connection con = connect(); 
+		
+			if (con == null)    
+			{
+				return "Error while connecting to the database for reading."; 
+			} 
+	 
+			// Prepare the html table to be displayed    
+			output = "<table border=\'1\'><tr><th>Product Code</th><th>Description</th><th>Quantity</th><th>Price</th><th>Category</th><th>Update</th><th>Remove</th></tr>";
+	 
+			String query = "select * from product";    
+			Statement stmt = (Statement) con.createStatement();
+			ResultSet rs = ((java.sql.Statement) stmt).executeQuery(query);
+	 
+			// iterate through the rows in the result set    
+			while (rs.next())    
+			{     
+				String pro_ID = Integer.toString(rs.getInt("pro_ID"));
+				String proCode = rs.getString("proCode");
+				 String desc = rs.getString("desc");
+				 String qty = rs.getString("qty");
+				 String price = rs.getString("price");
+				 String category = rs.getString("category");
+			
+			
+	 
+				// Add into the html table 
+				output += "<tr><td><input id=\'hidProductIDUpdate\' name=\'hidProductIDUpdate\' type=\'hidden\' value=\'" + pro_ID + "' >" + proCode + "</td>"; 
+				output += "<td>" + desc + "</td>";
+				output += "<td>" + qty + "</td>";
+				output += "<td>" + price + "</td>";
+				output += "<td>" + category + "</td>";
+
+				  
+	 
+				// buttons     
+				output +="<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary'></td>"       
+						+ "<td><input name='btnRemove' type='button' value='Remove' class='btnRemove btn btn-danger' data-productid='" + pro_ID + "'>" + "</td></tr>"; 
+			
+			}
+			con.close(); 
+	 
+			// Complete the html table    
+			output += "</table>";   
+		}   
+		catch (Exception e)   
+		{    
+			output = "Error while reading the payment.";    
+			System.err.println(e.getMessage());   
+		} 
+	 
+		return output;  
+	}
