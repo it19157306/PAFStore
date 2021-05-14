@@ -55,3 +55,17 @@ public class ProductAPI extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
 	 */
+	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method
+
+		Map paras = getParasMap(request); 
+		 
+		 String output = productObj.updateProduct(paras.get("hidProductIDSave").toString(),     
+		    		paras.get("proCode").toString(),     
+		    		paras.get("desc").toString(),
+		    		paras.get("qty").toString(),
+		    		paras.get("price").toString(),
+		    		paras.get("category").toString()); 
+		 
+		 			response.getWriter().write(output);
+	}
