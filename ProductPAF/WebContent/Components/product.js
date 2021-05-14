@@ -99,3 +99,35 @@ $(document).on("click", ".btnRemove", function(event)
 		}  
 	}); 
 }); 
+
+function onProductDeleteComplete(response, status) 
+{  
+	if (status == "success")  
+	{   
+		var resultSet = JSON.parse(response); 
+
+		if (resultSet.status.trim() == "success")   
+		{    
+			
+			$("#alertSuccess").text("Successfully deleted.");    
+			$("#alertSuccess").show(); 
+		
+			$("#divProductGrid").html(resultSet.data); 
+			
+		} else if (resultSet.status.trim() == "error")   
+		{    
+			$("#alertError").text(resultSet.data);    
+			$("#alertError").show();   
+		}
+		
+
+	} else if (status == "error")  
+	{   
+		$("#alertError").text("Error while deleting.");   
+		$("#alertError").show();  
+	} else  
+	{   
+		$("#alertError").text("Unknown error while deleting..");   
+		$("#alertError").show();  
+	}
+}
