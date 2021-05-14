@@ -123,3 +123,44 @@ public class product {
 	 
 		return output;  
 	}
+	
+	public String updateProduct(String pro_ID, String proCode, String desc, String qty, String price, String category)  
+	{   
+		String output = ""; 
+	 
+		try   
+		{    
+			Connection con = connect(); 
+	 
+			if (con == null)    
+			{return "Error while connecting to the database for updating."; } 
+	 
+			// create a prepared statement    
+			String query = "UPDATE product p SET p.proCode=?,p.desc=?,p.qty=?,p.price=?,p.category=? WHERE p.pro_ID=?";
+					   
+	 
+			PreparedStatement preparedStmt = con.prepareStatement(query); 
+	 
+			// binding values    
+			preparedStmt.setString(1, proCode);
+			 preparedStmt.setString(2, desc);
+			 preparedStmt.setString(3, qty);
+			 preparedStmt.setString(4, price);
+			 preparedStmt.setString(5, category);
+			 preparedStmt.setInt(6, Integer.parseInt(pro_ID)); 
+	 
+			// execute the statement    
+			preparedStmt.execute();    
+			con.close(); 
+	 
+			String newProduct = readProduct();    
+			output = "{\"status\":\"success\", \"data\": \"" + newProduct + "\"}";    
+		}   
+		catch (Exception e)   
+		{    
+			output =  "{\"status\":\"error\", \"data\": \"Error while updating the product.\"}";   
+			System.err.println(e.getMessage());   
+		} 
+	 
+	  return output;  
+	} 
